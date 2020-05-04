@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="codebase/webix.css" type="text/css" charset="utf-8">
+	<script src="codebase/webix.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.7.94/css/materialdesignicons.css" type="text/css"
+		charset="utf-8">
+	<title>Yamaha control</title>
+</head>
+
+<body>
+	<div id="data_container"></div>
+
+	<script>
+		// http://yamaha/YamahaExtendedControl/v1/system/getFeatures
+
+		var receiverIp = getCookie("ip");
+		if (receiverIp === "") {
+			alert("Please set reciver IP");
+		}
+		var receiverApi = "http://" + receiverIp + "/YamahaExtendedControl/v1/";
+
+		var window = webix.ui({
+			rows: [
+				{
+					cols: [
+						{
+							view: "label", id: "label1", label: ""
+						},
+						{
+							view: "label", id: "label2", label: ""
+						},
+						{
+							view: "label", id: "label3", label: ""
+						}
+					]
+				},
+				{
+					cols: [
+						{
+							rows: [
+								{
+									view: "text", label: "Reciver IP", value: receiverIp, on: {
+										onChange(newVal, oldVal) {
+											receiverApi = "http://" + receiverIp + "/YamahaExtendedControl/v1/";
+											setCookie("ip", newVal);
+
+											window.location.reload(true)
+										}
+									}
+								},
+								{ template: "Tree" },
+								{ view: "button", type: "image", id: "image1", width: 250, height: 250, image: "" }
+							]
+						},
+						{
+							rows: [
+								{
+									cols: [
+										{ view: "label", label: "Power"},
+										{
+											view: "button", value: "On", id: "power_on", href: "main/setPower?power=on", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "Standby", id: "power_standby", href: "main/setPower?power=standby", click: function () {
+												control(this.config.href);
+											}
+										}
+									]
+								},
+								{
+									cols: [
+										{ view: "label", label: "Volume" },
+										{
+											view: "button", value: "Mute", href: "main/setMute?enable=true", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "10", id: "volume_10", href: "main/setVolume?volume=10", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "20", id: "volume_20", href: "main/setVolume?volume=20", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "30", id: "volume_30", href: "main/setVolume?volume=30", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "40", id: "volume_40", href: "main/setVolume?volume=40", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "50", id: "volume_50", href: "main/setVolume?volume=50", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "60", id: "volume_60", href: "main/setVolume?volume=60", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "70", id: "volume_70", href: "main/setVolume?volume=70", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "80", id: "volume_80", href: "main/setVolume?volume=80", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "90", id: "volume_90", href: "main/setVolume?volume=90", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "100", id: "volume_100", href: "main/setVolume?volume=100", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "Vol -", href: "main/setVolume?volume=down&step=5", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "Vol +", href: "main/setVolume?volume=up&step=5", click: function () {
+												control(this.config.href);
+											}
+										}
+									]
+								},
+								{
+									// ["napster","spotify","qobuz","tidal","deezer","amazon_music","alexa","airplay","mc_link","server","net_radio","bluetooth","usb","tuner","hdmi1","hdmi2","hdmi3","hdmi4","av1","av2","av3","audio1","audio2","audio3","aux"]
+									cols: [
+										{ view: "label", label: "Input"},
+										{
+											view: "button", value: "HDMI1", href: "main/setInput?input=hdmi1", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "HDMI2", href: "main/setInput?input=hdmi2", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "HDMI3", href: "main/setInput?input=hdmi3", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "HDMI4", href: "main/setInput?input=hdmi4", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "MusicCast", id: "input_mc_link", href: "main/setInput?input=mc_link", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "NET Radio", id: "input_net_radio", href: "main/setInput?input=net_radio", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "Bluetooth", id: "input_bluetooth", href: "main/setInput?input=bluetooth", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "Server", id: "input_server", href: "main/setInput?input=server", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "USB", id: "input_usb", href: "main/setInput?input=usb", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "DAB", id: "input_tuner", href: "main/setInput?input=tuner", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "Spotify", href: "main/setInput?input=spotify", click: function () {
+												control(this.config.href);
+											}
+										}
+									]
+								},
+								{
+									cols: [
+										// http://yamaha/YamahaExtendedControl/v1/main/getSoundProgramList
+										{ view: "label", label: "Sound"},
+										{
+											view: "button", value: "Straight", id: "sound_program_straight", href: "main/setSoundProgram?program=straight", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "2ch Stereo", id: "sound_program_2ch_stereo", href: "main/setSoundProgram?program=2ch_stereo", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", value: "5ch Stereo", id: "sound_program_5ch_stereo", href: "main/setSoundProgram?program=5ch_stereo", click: function () {
+												control(this.config.href);
+											}
+										}
+									]
+								},
+								// netusb
+								{
+									cols: [
+										{ view: "label", label: "Netusb"},
+										{
+											view: "button", type: "icon", label: "Previous", icon: "mdi mdi-skip-previous", href: "netusb/setPlayback?playback=previous", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", type: "icon", label: "Stop", icon: "mdi mdi-stop", href: "netusb/setPlayback?playback=stop", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", type: "icon", label: "Play", icon: "mdi mdi-play", href: "netusb/setPlayback?playback=play", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", type: "icon", label: "Next", icon: "mdi mdi-skip-next", href: "netusb/setPlayback?playback=next", click: function () {
+												control(this.config.href);
+											}
+										}
+									]
+								},
+								// dab
+								{
+									cols: [
+										{ view: "label", label: "DAB" },
+										{
+											view: "button", type: "icon", label: "Previous", icon: "mdi mdi-skip-previous", href: "tuner/setDabService?dir=previous", click: function () {
+												control(this.config.href);
+											}
+										},
+										{
+											view: "button", type: "icon", label: "Next", icon: "mdi mdi-skip-next", href: "tuner/setDabService?dir=next", click: function () {
+												control(this.config.href);
+											}
+										}
+									]
+								},
+								{
+									view: "textarea",
+									id: "status",
+									height: 50
+								},
+								{
+									cols: [
+										{ template: "Status<pre>#form#</pre> ", id: "log1", height: 580, data: { form: "" } },
+										{ template: "PlayInfo<pre>#form#</pre> ", id: "log2", height: 300, data: { form: "" } },
+										{ template: "ListInfo<pre>#form#</pre> ", id: "log3", height: 100, data: { form: "" } },
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		});
+
+		function setCookie(name, value) {
+			webix.storage.cookie.put(name, value);
+		}
+
+		function getCookie(name) {
+			return webix.storage.cookie.get(name);
+		}
+
+		function crosInfo() {
+			if (navigator.userAgent.indexOf("Chrome") !== -1) {
+				var pluginUrl = "https://chrome.google.com/webstore/detail/cross-domain-cors/mjhpgnbimicffchbodmgfnemoghjakai";
+			} else if (navigator.userAgent.indexOf("Mozilla") !== -1) {
+				var pluginUrl = "https://addons.mozilla.org/en-US/firefox/addon/cross-domain-cors/";
+			}
+
+			debug("CROS plugin missing. Please install the plugin and allow exception for your reciver IP / DNS:\n<br>" + pluginUrl);
+		}
+
+		function debug(text, attach = false) {
+			if (attach) {
+				text = $$("status").getValue() + "\n\n" + text;
+			}
+
+			$$("status").setValue(text.replace(/["|{|}]/g, '').replace(/:/g, ': ').replace(/,/g, '\n'));
+		}
+
+		function debug1(data) {
+			$$("log1").setValues({
+				form: JSON.stringify(data, null, " ")
+			});
+		}
+
+		function debug2(data) {
+			$$("log2").setValues({
+				form: JSON.stringify(data, null, " ")
+			});
+		}
+
+		function debug3(data) {
+			$$("log3").setValues({
+				form: JSON.stringify(data, null, " ")
+			});
+		}
+
+		function control(cmd) {
+			webix.ajax().get(receiverApi + cmd);
+
+			webix.delay(function () {
+				getInfo();
+			}, null, null, 100);
+		}
+
+		function tuner_getPlayInfo() {
+			webix.ajax().get(receiverApi + "tuner/getPlayInfo", {
+				error: function (text, data, XmlHttpRequest) {
+					debug("no data", true);
+				},
+
+				success: function (text, data, XmlHttpRequest) {
+					var data = JSON.parse(text);
+
+					$$("label3").setValue(data.dab.service_label);
+					var track = data.dab.dls;
+					$$("label2").setValue(track);
+					document.title = track;
+
+					debug2(data);
+				}
+			});
+		}
+
+		function netusb_getPlayInfo() {
+			webix.ajax().get(receiverApi + "netusb/getPlayInfo", {
+				error: function (text, data, XmlHttpRequest) {
+					debug("no data", true);
+				},
+
+				success: function (text, data, XmlHttpRequest) {
+					var data = JSON.parse(text);
+
+					$$("label3").setValue(data.artist);
+					var track = data.track
+					$$("label2").setValue(track);
+					document.title = track;
+
+					var albumart_url = data.albumart_url;
+					if (albumart_url) {
+						$$("image1").config.image = "http://" + receiverIp + albumart_url;
+						$$("image1").refresh();
+					}
+					debug2(data);
+				}
+			});
+		}
+
+		function getInfo() {
+			webix.ajax().get(receiverApi + "main/getStatus", {
+				error: function (text, data, XmlHttpRequest) {
+					crosInfo();
+				},
+
+				success: function (text, data, XmlHttpRequest) {
+					var data = JSON.parse(text);
+
+					$$("label1").setValue(data.input_text);
+
+					var power = data.power;
+					webix.html.removeCss($$("power_on").getNode(), "webix_primary");
+					webix.html.removeCss($$("power_standby").getNode(), "webix_primary");
+					webix.html.addCss($$("power_" + power).getNode(), "webix_primary");
+
+					var volume = data.volume;
+					webix.html.removeCss($$("volume_10").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_20").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_30").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_40").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_50").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_60").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_70").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_80").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_90").getNode(), "webix_primary");
+					webix.html.removeCss($$("volume_100").getNode(), "webix_primary");
+					webix.html.addCss($$("volume_" + volume).getNode(), "webix_primary");
+
+					var input = data.input;
+					webix.html.removeCss($$("input_bluetooth").getNode(), "webix_primary");
+					webix.html.removeCss($$("input_net_radio").getNode(), "webix_primary");
+					webix.html.removeCss($$("input_usb").getNode(), "webix_primary");
+					webix.html.removeCss($$("input_mc_link").getNode(), "webix_primary");
+					webix.html.removeCss($$("input_server").getNode(), "webix_primary");
+					webix.html.removeCss($$("input_tuner").getNode(), "webix_primary");
+					webix.html.addCss($$("input_" + input).getNode(), "webix_primary");
+
+					var sound = data.sound_program;
+					webix.html.removeCss($$("sound_program_straight").getNode(), "webix_primary");
+					webix.html.removeCss($$("sound_program_2ch_stereo").getNode(), "webix_primary");
+					webix.html.removeCss($$("sound_program_5ch_stereo").getNode(), "webix_primary");
+					webix.html.addCss($$("sound_program_" + sound).getNode(), "webix_primary");
+
+					switch (input) {
+						case "net_radio":
+						case "server":
+						case "usb":
+							netusb_getPlayInfo();
+							netusb_getListInfo();
+							break;
+						case "tuner":
+							tuner_getPlayInfo();
+							break;
+						default:
+							break;
+					}
+
+					debug1(data);
+				}
+			});
+		}
+
+		function netusb_getListInfo() {
+			// http://yamaha/YamahaExtendedControl/v1/netusb/setListControl?list_id=main&type=play&index=50
+			// http://yamaha/YamahaExtendedControl/v1/netusb/setListControl?list_id=Musik&type=select&index=0
+			webix.ajax().get(receiverApi + "netusb/getListInfo?input=server&index=0&size=8", {
+				error: function (text, data, XmlHttpRequest) {
+					debug("no data", true);
+				},
+
+				success: function (text, data, XmlHttpRequest) {
+					var data = JSON.parse(text);
+
+					$$("label3").setValue(data.netusb);
+
+					debug3(data);
+				}
+			});
+		}
+
+		getInfo();
+		setInterval(function () {
+			getInfo();
+		}, 15000);
+	</script>
+</body>
+
+</html>
