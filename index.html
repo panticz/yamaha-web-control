@@ -58,7 +58,7 @@
 							rows: [
 								{
 									cols: [
-										{ view: "label", label: "Power"},
+										{ view: "label", label: "Power" },
 										{
 											view: "button", value: "On", id: "power_on", href: "main/setPower?power=on", click: function () {
 												control(this.config.href);
@@ -144,7 +144,7 @@
 								{
 									// ["napster","spotify","qobuz","tidal","deezer","amazon_music","alexa","airplay","mc_link","server","net_radio","bluetooth","usb","tuner","hdmi1","hdmi2","hdmi3","hdmi4","av1","av2","av3","audio1","audio2","audio3","aux"]
 									cols: [
-										{ view: "label", label: "Input"},
+										{ view: "label", label: "Input" },
 										{
 											view: "button", value: "HDMI1", href: "main/setInput?input=hdmi1", click: function () {
 												control(this.config.href);
@@ -205,7 +205,7 @@
 								{
 									cols: [
 										// http://yamaha/YamahaExtendedControl/v1/main/getSoundProgramList
-										{ view: "label", label: "Sound"},
+										{ view: "label", label: "Sound" },
 										{
 											view: "button", value: "Straight", id: "sound_program_straight", href: "main/setSoundProgram?program=straight", click: function () {
 												control(this.config.href);
@@ -226,7 +226,7 @@
 								// netusb
 								{
 									cols: [
-										{ view: "label", label: "Netusb"},
+										{ view: "label", label: "Netusb" },
 										{
 											view: "button", type: "icon", label: "Previous", icon: "mdi mdi-skip-previous", href: "netusb/setPlayback?playback=previous", click: function () {
 												control(this.config.href);
