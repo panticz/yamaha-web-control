@@ -80,53 +80,11 @@
 											}
 										},
 										{
-											view: "button", value: "10", id: "volume_10", href: "main/setVolume?volume=10", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "20", id: "volume_20", href: "main/setVolume?volume=20", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "30", id: "volume_30", href: "main/setVolume?volume=30", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "40", id: "volume_40", href: "main/setVolume?volume=40", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "50", id: "volume_50", href: "main/setVolume?volume=50", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "60", id: "volume_60", href: "main/setVolume?volume=60", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "70", id: "volume_70", href: "main/setVolume?volume=70", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "80", id: "volume_80", href: "main/setVolume?volume=80", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "90", id: "volume_90", href: "main/setVolume?volume=90", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "100", id: "volume_100", href: "main/setVolume?volume=100", click: function () {
-												control(this.config.href);
+											view: "slider", id: "volume", value: "30", step: "5", moveTitle: false, title: webix.template("#value#"),
+											on: {
+												onSliderDrag: function () {
+													control("main/setVolume?volume=" + this.getValue());
+												}
 											}
 										},
 										{
@@ -396,17 +354,7 @@
 					webix.html.addCss($$("power_" + power).getNode(), "webix_primary");
 
 					var volume = data.volume;
-					webix.html.removeCss($$("volume_10").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_20").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_30").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_40").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_50").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_60").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_70").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_80").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_90").getNode(), "webix_primary");
-					webix.html.removeCss($$("volume_100").getNode(), "webix_primary");
-					webix.html.addCss($$("volume_" + volume).getNode(), "webix_primary");
+					$$("volume").setValue(data.volume);
 
 					var input = data.input;
 					webix.html.removeCss($$("input_bluetooth").getNode(), "webix_primary");
