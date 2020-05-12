@@ -81,7 +81,10 @@
 										},
 										{
 											view: "slider", id: "volume", value: "30", step: "5", moveTitle: false, title: webix.template("#value#"),
-											on: {
+											on: { 
+												onChange: function () {
+													control("main/setVolume?volume=" + this.getValue());
+												},
 												onSliderDrag: function () {
 													control("main/setVolume?volume=" + this.getValue());
 												}
