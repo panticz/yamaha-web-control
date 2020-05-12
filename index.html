@@ -60,13 +60,11 @@
 									cols: [
 										{ view: "label", label: "Power" },
 										{
-											view: "button", value: "On", id: "power_on", href: "main/setPower?power=on", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "Standby", id: "power_standby", href: "main/setPower?power=standby", click: function () {
-												control(this.config.href);
+											view: "segmented",  id: "power", options: [
+												{ id: "on", value: "On" },
+												{ id: "standby", value: "Standby" },
+											], click: function () {
+												control("main/setPower?power=" + this.getValue());
 											}
 										}
 									]
@@ -352,9 +350,7 @@
 					$$("label1").setValue(data.input_text);
 
 					var power = data.power;
-					webix.html.removeCss($$("power_on").getNode(), "webix_primary");
-					webix.html.removeCss($$("power_standby").getNode(), "webix_primary");
-					webix.html.addCss($$("power_" + power).getNode(), "webix_primary");
+					$$("power").setValue(power);
 
 					var volume = data.volume;
 					$$("volume").setValue(data.volume);
