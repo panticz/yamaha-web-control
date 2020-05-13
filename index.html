@@ -105,58 +105,20 @@
 									cols: [
 										{ view: "label", label: "Input" },
 										{
-											view: "button", value: "HDMI1", href: "main/setInput?input=hdmi1", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "HDMI2", href: "main/setInput?input=hdmi2", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "HDMI3", href: "main/setInput?input=hdmi3", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "HDMI4", href: "main/setInput?input=hdmi4", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "MusicCast", id: "input_mc_link", href: "main/setInput?input=mc_link", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "NET Radio", id: "input_net_radio", href: "main/setInput?input=net_radio", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "Bluetooth", id: "input_bluetooth", href: "main/setInput?input=bluetooth", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "Server", id: "input_server", href: "main/setInput?input=server", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "USB", id: "input_usb", href: "main/setInput?input=usb", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "DAB", id: "input_tuner", href: "main/setInput?input=tuner", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "Spotify", href: "main/setInput?input=spotify", click: function () {
-												control(this.config.href);
+											view: "segmented", id: "input", options: [
+												{ id: "hdmi1", value: "HDMI1" },
+												{ id: "hdmi2", value: "HDMI2" },
+												{ id: "hdmi3", value: "HDMI3" },
+												{ id: "hdmi4", value: "HDMI4" },
+												{ id: "mc_link", value: "MusicCast" },
+												{ id: "net_radio", value: "NET Radio" },
+												{ id: "bluetooth", value: "Bluetooth" },
+												{ id: "server", value: "Server" },
+												{ id: "usb", value: "USB" },
+												{ id: "tuner", value: "DAB" },
+												{ id: "spotify", value: "Spotify" }
+											], click: function () {
+												control("main/setInput?input=" + this.getValue());
 											}
 										}
 									]
@@ -356,13 +318,7 @@
 					$$("volume").setValue(volume);
 
 					var input = data.input;
-					webix.html.removeCss($$("input_bluetooth").getNode(), "webix_primary");
-					webix.html.removeCss($$("input_net_radio").getNode(), "webix_primary");
-					webix.html.removeCss($$("input_usb").getNode(), "webix_primary");
-					webix.html.removeCss($$("input_mc_link").getNode(), "webix_primary");
-					webix.html.removeCss($$("input_server").getNode(), "webix_primary");
-					webix.html.removeCss($$("input_tuner").getNode(), "webix_primary");
-					webix.html.addCss($$("input_" + input).getNode(), "webix_primary");
+					$$("input").setValue(input);
 
 					var sound = data.sound_program;
 					webix.html.removeCss($$("sound_program_straight").getNode(), "webix_primary");
