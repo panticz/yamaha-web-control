@@ -128,18 +128,12 @@
 										// http://yamaha/YamahaExtendedControl/v1/main/getSoundProgramList
 										{ view: "label", label: "Sound" },
 										{
-											view: "button", value: "Straight", id: "sound_program_straight", href: "main/setSoundProgram?program=straight", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "2ch Stereo", id: "sound_program_2ch_stereo", href: "main/setSoundProgram?program=2ch_stereo", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "5ch Stereo", id: "sound_program_5ch_stereo", href: "main/setSoundProgram?program=5ch_stereo", click: function () {
-												control(this.config.href);
+											view: "segmented", id: "sound_program", options: [
+												{ id: "straight", value: "Straight" },
+												{ id: "2ch_stereo", value: "2ch Stereo" },
+												{ id: "5ch_stereo", value: "5ch Stereo" }
+											], click: function () {
+												control("main/setSoundProgram?program=" + this.getValue());
 											}
 										}
 									]
@@ -320,11 +314,8 @@
 					var input = data.input;
 					$$("input").setValue(input);
 
-					var sound = data.sound_program;
-					webix.html.removeCss($$("sound_program_straight").getNode(), "webix_primary");
-					webix.html.removeCss($$("sound_program_2ch_stereo").getNode(), "webix_primary");
-					webix.html.removeCss($$("sound_program_5ch_stereo").getNode(), "webix_primary");
-					webix.html.addCss($$("sound_program_" + sound).getNode(), "webix_primary");
+					var sound_program = data.sound_program;
+					$$("sound_program").setValue(sound_program);
 
 					switch (input) {
 						case "net_radio":
