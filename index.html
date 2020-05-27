@@ -73,6 +73,11 @@
 									cols: [
 										{ view: "label", label: "Volume" },
 										{
+											view: "button", value: "Mute", href: "main/setMute?enable=true", click: function () {
+												control(this.config.href);
+											}
+										},										
+										{
 											view: "button", value: "Vol -", href: "main/setVolume?volume=down&step=5", click: function () {
 												control(this.config.href);
 											}
@@ -90,11 +95,6 @@
 										},
 										{
 											view: "button", value: "Vol +", href: "main/setVolume?volume=up&step=5", click: function () {
-												control(this.config.href);
-											}
-										},
-										{
-											view: "button", value: "Mute", href: "main/setMute?enable=true", click: function () {
 												control(this.config.href);
 											}
 										}
