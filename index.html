@@ -384,6 +384,26 @@
 			});
 		}
 
+		function enable_mouse_wheel_volume_control() {
+			let slider = $$("volume");
+
+			webix.event(slider.$view, "wheel", function (e) {
+				let value = slider.getValue();
+				let step = parseInt(slider.config.step);
+
+				if (e.deltaY > 0) {
+					value = Math.max(value - step, slider.config.min);
+				} else {
+					value = Math.min(value + step, slider.config.max);
+				}
+				slider.setValue(value);
+
+				return webix.html.preventEvent(e);
+			})
+		}
+
+		enable_mouse_wheel_volume_control();
+
 		getInfo();
 		setInterval(function () {
 			getInfo();
