@@ -76,7 +76,7 @@
 											view: "button", value: "Mute", href: "main/setMute?enable=true", click: function () {
 												control(this.config.href);
 											}
-										},										
+										},
 										{
 											view: "button", value: "Vol -", href: "main/setVolume?volume=down&step=5", click: function () {
 												control(this.config.href);
@@ -182,18 +182,44 @@
 										}
 									]
 								},
+								// {
+								// 	view: "textarea",
+								// 	id: "status",
+								// 	height: 50
+								// },
 								{
-									view: "textarea",
-									id: "status",
-									height: 50
+									view: "fieldset", label: "Info", body: {
+										view: "textarea",
+										id: "status",
+										height: 50
+									}
 								},
+								// {
+								// 	cols: [
+								// 		{ template: "Status<pre>#form#</pre> ", id: "log1", height: 580, data: { form: "" } },
+								// 		{ template: "PlayInfo<pre>#form#</pre> ", id: "log2", height: 300, data: { form: "" } },
+								// 		{ template: "ListInfo<pre>#form#</pre> ", id: "log3", height: 100, data: { form: "" } },
+								// 	]
+								// }
 								{
 									cols: [
-										{ template: "Status<pre>#form#</pre> ", id: "log1", height: 580, data: { form: "" } },
-										{ template: "PlayInfo<pre>#form#</pre> ", id: "log2", height: 300, data: { form: "" } },
-										{ template: "ListInfo<pre>#form#</pre> ", id: "log3", height: 100, data: { form: "" } },
+										{
+											view: "fieldset", label: "Status", body: {
+												template: "<pre>#form#</pre>", borderless: true, id: "log1", height: 580, data: { form: "" }
+											}
+										},
+										{
+											view: "fieldset", label: "PlayInfo", body: {
+												template: "<pre>#form#</pre>", borderless: true, id: "log2", height: 580, data: { form: "" }
+											}
+										},
+										{
+											view: "fieldset", label: "ListInfo", body: {
+												template: "<pre>#form#</pre>", borderless: true, id: "log3", height: 580, height: 500, data: { form: "" }
+											}
+										}
 									]
-								}
+								},
 							]
 						}
 					]
@@ -216,7 +242,7 @@
 				var pluginUrl = "https://addons.mozilla.org/en-US/firefox/addon/cross-domain-cors/";
 			}
 
-			debug("CROS plugin missing. Please install the plugin and allow exception for your reciver IP / DNS:\n<br>" + pluginUrl);
+			debug("CROS plugin missing. Please install the plugin and allow exception for your reciver IP / DNS:\n" + pluginUrl);
 		}
 
 		function debug(text, attach = false) {
@@ -224,7 +250,7 @@
 				text = $$("status").getValue() + "\n\n" + text;
 			}
 
-			$$("status").setValue(text.replace(/["|{|}]/g, '').replace(/:/g, ': ').replace(/,/g, '\n'));
+			$$("status").setValue(text.replace(/["|{|}]/g, '').replace(/:/g, ': ').replace(/,/g, '\n').trim());
 		}
 
 		function debug1(data) {
@@ -291,6 +317,7 @@
 						$$("image1").config.image = "http://" + receiverIp + albumart_url;
 						$$("image1").refresh();
 					}
+
 					debug2(data);
 				}
 			});
